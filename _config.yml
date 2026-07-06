@@ -1,4 +1,44 @@
-title: "我的博客"
-description: "欢迎来到我的博客！"
+# 站点基础信息
+title: "朱昊天的博客"
+description: "记录学习、思考与生活"
+lang: zh-CN
 baseurl: ""
 url: "https://horacezoe.github.io"
+
+# 作者信息
+author:
+  name: "朱昊天"
+  bio: "南京大学软件工程专业在读，热爱编程与运动。"
+  email: ""
+  qq: "2671598054"
+
+# Jekyll 构建设置
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+permalink: /posts/:year/:month/:day/:title/
+
+# 分页（文章增多后自动分页）
+paginate: 10
+paginate_path: "/page:num/"
+
+# 排除不需要发布的文件
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+
+# 默认 Front Matter
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"

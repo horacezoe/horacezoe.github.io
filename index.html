@@ -1,60 +1,71 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>朱昊天的个人介绍</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        p {
-            font-size: 18px;
-            color: #555;
-        }
-        .skills, .contact {
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>朱昊天的自我介绍</h1>
-        <p>你好！我叫朱昊天，南京大学软件工程专业大三在读。我喜欢打乒乓球和游泳。在学业上，我掌握了Java和C语言，并且一直在不断提升自己的编程技能。</p>
-        <div class="skills">
-            <h2>技能</h2>
-            <ul>
-                <li>Java</li>
-                <li>C语言</li>
-            </ul>
-        </div>
-        <div class="contact">
-            <h2>联系方式</h2>
-            <p>QQ: 2671598054</p>
-        </div>
+---
+layout: default
+title: 首页
+---
+
+<section class="hero">
+  <span class="hero-greeting">👋 你好，欢迎来访</span>
+  <h1 class="hero-title">{{ site.author.name }}的个人博客</h1>
+  <p class="hero-subtitle">
+    {{ site.author.bio }}
+    在这里记录学习笔记、技术思考与生活点滴。
+  </p>
+  <div class="hero-links">
+    <a class="btn btn-primary" href="#posts">阅读文章</a>
+    <a class="btn btn-outline" href="{{ '/about/' | relative_url }}">了解更多</a>
+  </div>
+</section>
+
+<section class="section" id="posts">
+  <div class="section-header">
+    <h2 class="section-title">最新文章</h2>
+    <span class="section-count">共 {{ paginator.total_posts }} 篇</span>
+  </div>
+
+  {% if paginator.posts.size > 0 %}
+    <ul class="post-list">
+      {% for post in paginator.posts %}
+        <li>
+          <a class="post-card" href="{{ post.url | relative_url }}">
+            <div class="post-card-meta">
+              <time datetime="{{ post.date | date_to_xmlschema }}">
+                {{ post.date | date: "%Y年%m月%d日" }}
+              </time>
+              {% if post.categories.size > 0 %}
+                {% for category in post.categories %}
+                  <span class="tag">{{ category }}</span>
+                {% endfor %}
+              {% endif %}
+            </div>
+            <h3 class="post-card-title">{{ post.title }}</h3>
+            <p class="post-card-excerpt">
+              {% if post.excerpt %}
+                {{ post.excerpt | strip_html | truncate: 120 }}
+              {% else %}
+                {{ post.content | strip_html | truncate: 120 }}
+              {% endif %}
+            </p>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    {% if paginator.total_pages > 1 %}
+      <nav class="pagination" aria-label="文章分页">
+        {% if paginator.previous_page %}
+          <a href="{{ paginator.previous_page_path | relative_url }}">← 上一页</a>
+        {% endif %}
+        <span class="page-number">
+          第 {{ paginator.page }} / {{ paginator.total_pages }} 页
+        </span>
+        {% if paginator.next_page %}
+          <a href="{{ paginator.next_page_path | relative_url }}">下一页 →</a>
+        {% endif %}
+      </nav>
+    {% endif %}
+  {% else %}
+    <div class="empty-state">
+      <p>还没有发布文章，敬请期待。</p>
     </div>
-</body>
-<div class="container">
-    <h1>朱昊天的个人博客</h1>
-    <!-- 其他内容 -->
-    <p><a href="songs.html">我喜欢的歌曲</a></p>
-    <p><a href="about.html">关于我</a></p>
-</div>
-
-</html>
-
+  {% endif %}
+</section>
