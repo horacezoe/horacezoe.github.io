@@ -57,21 +57,3 @@ excerpt: "最近在尝试用 Audacity 把普通立体声音乐做出环绕感。
 
 如果你也折腾过类似的东西，或者有合适的插件、思路推荐，欢迎告诉我。
 
----
-
-## 附：文章里怎么加图片？
-
-图片文件放在项目的 `assets/images/` 目录下，然后在文章正文里用 Markdown 引用即可。例如：
-
-```markdown
-![左右声道波形对比](/assets/images/audacity-envelope-example.png)
-```
-
-如果图片和文章在同一篇里，想加说明文字，可以这样写：
-
-```markdown
-![Audacity 包络工具界面](/assets/images/audacity-envelope-tool.png)
-*图：用包络工具分别调整左右声道的示意（请替换为你自己的截图文件名）*
-```
-
-上传图片后推送到 GitHub，构建完成就能在文章里看到。建议截图用 `.png`，照片用 `.jpg`，文件名用英文或拼音，避免中文路径带来的兼容问题。
